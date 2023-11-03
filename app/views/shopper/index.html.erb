@@ -1,0 +1,243 @@
+<style>
+  .slider_m { display: none;}
+  @media all and (max-width: 768px){ .slider_w { display: none;} .slider_m { display: block;} }   
+</style>
+
+<!-- Main Slider -->
+<div id="carousel_4w" class="carousel slide" data-bs-ride="carousel_4w">
+	<div class="carousel-inner">
+		<div class="carousel-inner">
+			<% @slider_first= Slider.find(1)%>
+			<div class="carousel-item active">					
+			  <img src="<%= @slider_first.image_url %>" class="d-block w-100">
+			</div>
+			<% @sliders_main = Slider.where("id != 1 AND deleted=0 AND remark=1")%>
+			<% @sliders_main.each do |sm|%>
+			<div class="carousel-item">
+			  <img src="<%= sm.image_url %>" class="d-block w-100">
+			</div>
+			<% end %>
+		</div>
+
+	</div>
+	<button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+	  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+	  <span class="visually-hidden">Previous</span>
+	</button>
+	<button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+	  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+	  <span class="visually-hidden">Next</span>
+	</button>
+  </div>
+<!-- <div class="containera py-1">
+  <div class="row slider_3w">
+		<div id="carousel_3w" class="carousel slide" data-bs-ride="carousel_3w">
+			<div class="carousel-inner">
+				<% @slider_first= Slider.find(1)%>
+				<div class="carousel-item active">					
+				  <img src="<%= @slider_first.image_url %>" class="d-block w-100">
+				</div>
+				<% @sliders_main = Slider.where("id != 1 AND deleted=0 AND remark=1")%>
+				<% @sliders_main.each do |sm|%>
+				<div class="carousel-item">
+				  <img src="<%= sm.image_url %>" class="d-block w-100">
+				</div>
+				<% end %>
+			</div>
+			<button class="carousel-control-prev" type="button" data-bs-target="#carousel_1w" data-bs-slide="prev">
+  			  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			</button>
+			<button class="carousel-control-next" type="button" data-bs-target="#carousel_1w" data-bs-slide="next">
+			  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+			</button>
+		</div>
+  </div> -->
+  <!-- ---------------------------- -->
+  <div class="row slider_m">
+		<div id="carousel_1m" class="carousel slide" data-bs-ride="carousel">
+			<div class="carousel-inner">
+				<% @slider_first= Slider.find(1)%>
+				<div class="carousel-item active">					
+				  <img src="<%= @slider_first.image_mobile_url %>" class="d-block w-100" alt="Wild Landscape"/>
+				</div>
+				<% @sliders_main = Slider.where("id != 1 AND deleted=0 AND remark=1")%>
+				<% @sliders_main.each do |sm|%>
+				<div class="carousel-item">
+				  <img src="<%= sm.image_mobile_url %>" class="d-block w-100">
+				</div>
+				<% end %>
+			</div>
+			<button class="carousel-control-prev" type="button" data-bs-target="#carousel_1m" data-bs-slide="prev">
+			  <span class="carousel-control-prev-icon bg-warning rounded-circle" aria-hidden="true"></span>
+			</button>
+			<button class="carousel-control-next" type="button" data-bs-target="#carousel_1m" data-bs-slide="next">
+			  <span class="carousel-control-next-icon bg-warning rounded-circle" aria-hidden="true"></span>
+			</button>
+		</div>
+  </div>	
+</div>
+
+
+<!-- Categories Links -->
+<div class="container py-1">
+  <h1 class="text-center">Categorías</h1>
+  <div class="row slider_w">
+    <% @list_categories = Category.where("deleted=0") %>
+    <% @list_categories.each do |category| %>
+    <div class="col-xl-4 pb-4">
+      <div class="card" onclick="window.location='/product_by_categories/search?search_category=<%= category.id %>'" title="<%= category.name %>">
+      	<div class="row align-items-center">
+      	  <div class="col-xl-6 text-center">
+      	  	 <img src="<%= category.image_url %>" width="150" height="150"> 
+      	  </div>
+      	  <div class="col-xl-6 align-items-center text-left text-dark pr-2">
+      	  	<b class="text-start"><%= category.name %></b>
+      	  </div>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+  <br>
+  <div class="row slider_m">
+	<div id="carousel_2m" class="carousel slide" data-bs-ride="carousel">
+		<div class="carousel-inner">
+          <% @list_categories = Category.where("deleted =0").order("id ASC") %>
+          <% @list_categories.in_groups_of(3,false).each_with_index do |categories,index| %>
+		  <div class="carousel-item <% if index == 0 %>active<% end %>">
+		    <div class="row justify-content-center2">
+		      <div class="col-1"></div>
+		      <% categories.each do |category| %>
+		  	  <div class="col-5">
+		  	  	<div class="card2"onclick="window.location='/product_by_categories/search?search_category=<%= category.id %>'" title="<%= category.name %>">
+		  	  	 <img src="<%= category.image_url %>" width="140" height="140"> 	
+		  	  	 <b class="text-black"><h6 class="text-center"><%= category.name %></h6></b>
+                </div>
+			  </div>
+			  <% end %>
+			  <div class="col-1"></div>
+			</div>
+		  </div>	
+		  <% end %>	
+			 
+	 	</div>
+ 
+	 	<button class="carousel-control-prev" type="button" data-bs-target="#carousel_2m" data-bs-slide="prev">
+ 		  <span class="carousel-control-prev-icon bg-warning rounded-circle" aria-hidden="true"></span>
+	 	</button>
+	 	<button class="carousel-control-next" type="button" data-bs-target="#carousel_2m" data-bs-slide="next">
+	 	  <span class="carousel-control-next-icon bg-warning rounded-circle" aria-hidden="true"></span>
+	 	</button>
+	</div>  	
+
+  </div>   
+</div>
+
+<!-- ------------------------------------------------------- -->
+<div class="row slider_w">
+<div id="carouselExample" class="carousel slide" style="background-color: white;">
+	<div class="carousel-inner ">
+		<% @list_products = Product.where("deleted =0").order("id ASC") %>
+		<% @list_products.in_groups_of(4,false).each_with_index do |products,index| %>
+		<!-- <% @list_products = Product.where("deleted=0") %> -->
+		<div class="carousel-item <% if index == 0 %>active<% end %> ">
+			<div class="w-100 gap-2 p-5" style="display: flex; justify-content:center">
+				<!-- ---------------------- -->
+				<% products.each do |product| %>
+					<div id="item-product" class="col5">
+						<div  class="card px-2" style="width: 350px; height: 600px;display:flex ;justify-content: space-between; box-shadow: 0 0 0 1px #c4c4c4; margin: 2px .5rem 1rem; border-radius: 15px;">
+							<div class="d-flex" style="overflow: hidden; justify-content:center; align-items:center ;height:200px">
+								<img src="<%= product.image %>" class="d-block" alt="img" height="150px" width="auto" >
+							</div>
+							<div class="card-body d-flex" style="display: flex !important;
+							flex-flow: column;
+							align-content: space-between;
+							justify-content: space-between;
+							height: 300px">
+								<h6 style="font-size: 12px; color:#6b7485; text-transform:uppercase">
+									<%= product.category.name %>
+								</h6>
+								<h5 class="card-title" style="font-size: 15px;">
+									<%= product.name %>
+								</h5>
+								<p class="card-text"><%= product.description %></p>
+								<p style="text-decoration: line-through; color:#6b7485">S/. <%= product.list_price %></p>
+								<h2>S/. <%= product.price %></h2>
+								<a class="btn btn-primary w-100" style="text-align: center; color:white; background-color:#0f3e99; border-radius: 10px ">Agregar al Carrito</a>
+							</div>
+						</div>
+					</div>
+				<% end %>
+				</div>
+			</div>
+		<% end %>	
+	</div>
+	<button style="color: black;" class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+	  <span class="carousel-control-prev-icon" aria-hidden="true" style="filter: invert(1) grayscale(100);"></span>
+	  <span class="visually-hidden" style="filter: invert(1) grayscale(100);">Previous</span>
+	</button>
+	<button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+	  <span class="carousel-control-next-icon" style="filter: invert(1) grayscale(100);" aria-hidden="true"></span>
+	  <span class="visually-hidden">Next</span>
+	</button>
+  </div>
+</div>
+<!-- -----------------------------------MOBILE---------------------------- -->
+<div class="row slider_m">
+	<div id="carousel_3m" class="carousel slide" data-bs-ride="carousel" style="background-color: white;">
+		<div class="carousel-inner">
+			<% @list_products = Product.where("deleted =0").order("id ASC") %>
+			<% @list_products.in_groups_of(2,false).each_with_index do |products,index| %>
+			<!-- <% @list_products = Product.where("deleted=0") %> -->
+			<div class="carousel-item <% if index == 0 %>active<% end %>">
+				<div class="w-100 gap-2 p-1" style="display: flex; justify-content:center">
+					<!-- ---------------------- -->
+					<% products.each do |product| %>
+						<div id="item-product" class="col5">
+							<div  class="card px-2" style="width: 150px; height: 350px;display:flex ;justify-content: space-between; box-shadow: 0 0 0 1px #c4c4c4; margin: 2px .5rem 1rem; border-radius: 15px;">
+								<div class="d-flex" style="overflow: hidden; justify-content:center; align-items:center ;height:200px">
+									<img src="<%= product.image %>" class="d-block" alt="img" height="100px" width="auto" >
+								</div>
+								<div class="card-body d-flex p-0 py-1" style="display: flex !important;
+								flex-flow: column;
+								align-content: space-between;
+								justify-content: space-between;
+								height: 300px">
+									<h6 style="font-size: 5px;">
+										<%= product.category.name %>
+									</h6>
+									<h5 class="card-title" style='font-size: 10px;
+									max-height: 4rem;
+									line-height: 1rem;
+									overflow: hidden;
+									display: -webkit-box;
+									-webkit-box-orient: vertical !important;
+									-webkit-line-clamp: 2;'>
+										<%= product.name %>
+									</h5>
+									<p class="card-text" style="font-size: 10px;
+									max-height: 4rem;
+									line-height: 1rem;
+									overflow: hidden;
+									display: -webkit-box;
+									-webkit-box-orient: vertical !important;
+									-webkit-line-clamp: 2;"><%= product.description %></p>
+									<p style="text-decoration: line-through; color:#6b7485; font-size: 10px">S/. <%= product.list_price %></p>
+									<h2 style="font-size: 15px;">S/. <%= product.price %></h2>
+									<a class="btn btn-primary w-100" style="font-size:10px ;text-align: center; color:white; background-color:#0f3e99; border-radius: 10px ">Agregar al Carrito</a>
+								</div>
+							</div>
+						</div>
+					<% end %>
+					</div>
+				</div>
+			<% end %>	
+		</div>
+	 	<button class="carousel-control-prev" type="button" data-bs-target="#carousel_3m" data-bs-slide="prev">
+ 		  <span class="carousel-control-prev-icon bg-primary rounded-circle" aria-hidden="true"></span>
+	 	</button>
+	 	<button class="carousel-control-next" type="button" data-bs-target="#carousel_3m" data-bs-slide="next">
+	 	  <span class="carousel-control-next-icon bg-primary rounded-circle" aria-hidden="true"></span>
+	 	</button>
+	</div>
+</div>

@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  country_id: 1
+  num_doc: MyString
+  name: MyString
+  deleted: 1
+
+two:
+  country_id: 1
+  num_doc: MyString
+  name: MyString
+  deleted: 1

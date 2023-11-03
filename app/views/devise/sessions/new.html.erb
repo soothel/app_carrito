@@ -1,0 +1,29 @@
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <img class="mb-4" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbeoNzysiaP6xojISpBXUS7Z-CvG3lZI9_BzNxYSsGEg&s" alt="" width="72" height="57">
+    <h1 class="h3 mb-3 fw-normal">Login del Sistema</h1>
+
+    <div class="form-floating">
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", :placeholder => "name@example.com" %>
+      <label for="floatingInput">Correo</label>
+    </div>
+    <div class="form-floating">
+      <%= f.password_field :password, autocomplete: "current-password", class: "form-control", :placeholder=>"Contraseña" %>
+      <label for="floatingPassword">Contraseña</label>
+    </div>
+    
+    <% if devise_mapping.rememberable? %>
+    <div class="form-check text-start my-3">
+      <%= f.check_box :remember_me, class: "form-check-input" %>
+      <label class="form-check-label" for="flexCheckDefault">
+        Recordar contraseña
+      </label>
+    </div>
+    <% end %>
+
+    <button class="btn btn-primary w-100 py-2" type="submit">Ingresar</button>
+    
+    <p class="mt-5 mb-3 text-body-secondary">© Copyright 2023 - Todos los derechos reservados.</p>
+<% end %>
+
+
+<%= render "devise/shared/links" %>

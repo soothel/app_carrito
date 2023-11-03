@@ -1,0 +1,43 @@
+<%= form_with(model: slider) do |form| %>
+  <% if slider.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(slider.errors.count, "error") %> prohibited this slider from being saved:</h2>
+
+      <ul>
+        <% slider.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    Nombre
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    Slider:
+    <%= form.file_field :image  %>
+  </div>
+
+  <div>
+    Slider Mobile
+    <%= form.text_area :image_mobile %>
+    <%= form.file_field :image_mobile  %>
+  </div>
+
+  <div>
+    Destacado
+    <%= form.number_field :remark %>
+  </div>
+
+  <div>
+    Estado
+    <%= form.number_field :deleted %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

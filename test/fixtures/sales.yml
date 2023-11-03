@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date_payment: 2023-10-16
+  quote_id: 1
+  amount: 1.5
+  type_payment_id: 1
+  deleted: 1
+
+two:
+  date_payment: 2023-10-16
+  quote_id: 1
+  amount: 1.5
+  type_payment_id: 1
+  deleted: 1

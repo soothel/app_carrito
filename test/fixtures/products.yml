@@ -1,0 +1,31 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  category_id: 1
+  mark_id: 1
+  name: MyString
+  description: MyText
+  image: MyText
+  list_price: 1.5
+  discount: 1.5
+  price: 1.5
+  ranked: 1
+  stock: 1
+  technical_info: MyText
+  attach: MyText
+  deleted: 1
+
+two:
+  category_id: 1
+  mark_id: 1
+  name: MyString
+  description: MyText
+  image: MyText
+  list_price: 1.5
+  discount: 1.5
+  price: 1.5
+  ranked: 1
+  stock: 1
+  technical_info: MyText
+  attach: MyText
+  deleted: 1
