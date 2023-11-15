@@ -1,14 +1,84 @@
+<% @vista = "marks"%>
+<% @titulo = "Marcas" %>
+ 
 <p style="color: green"><%= notice %></p>
 
-<h1>Marks</h1>
-
-<div id="marks">
-  <% @marks.each do |mark| %>
-    <%= render mark %>
-    <p>
-      <%= link_to "Show this mark", mark %>
-    </p>
-  <% end %>
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1>
+  	Listado de <%= @titulo %>
+  	<a href="/<%= @vista %>/new" class="btn btn-dark btn-xs">
+  		<i class='fa fa-plus text-white'></i> Nuevo</a>
+  </h1>
 </div>
 
-<%= link_to "New mark", new_mark_path %>
+<div class="table-responsive">
+  <table id="mi_tablita" class="table  table-hover  ">
+    <thead>
+      <tr class="text-center">
+        <th>Nº</th>
+        <th>Imagen</th>
+        <th>Marca</th>
+        <th>Estado</th>
+        <th data-orderable="false" class="sorting_disabled">Acciones</th>             
+      </tr>
+      
+    </thead>
+    <tbody>
+    <% @list_array.each_with_index do |array,index| %>
+      <tr class="text-black text-center" valign="middle">
+   
+        <td><%= index + 1 %></td>
+        <td>
+          <% if array.image_url %>
+            <%= image_tag(array.image_url, :size => "100x50") %>
+          <% else %>
+            <i class="fa fa-user-secret fa-2x"></i>
+          <% end %>  
+    
+        <td><%= array.name %></td>
+
+        <td><%= array.str_deleted %></td>    
+       
+
+        <td data-orderable="false" class="sorting_disabled">
+          <div class="btn-group">
+
+               <a href="/<%= @vista %>/<%= array.id %>" class="btn btn-xs bg-success text-white" type="button" title="Ver" ><i class='fa fa-eye text-white'></i>    </a>
+
+                <a href="/<%= @vista %>/<%= array.id %>/edit" class="btn btn-xs bg-warning text-white" type="button" title="Editar" ><i class='fa fa-pencil text-white'></i>    </a>
+              
+                <a href="/<%= @vista %>/<%= array.id %>/delete" class="btn btn-xs bg-danger text-white" type="button" title="Eliminar" ><i class=' fa fa-trash text-white'></i>    </a>
+              
+            
+          </div>        
+        </td>        
+      </tr>
+    <% end %>                  
+    </tbody>
+  </table>
+</div>
+ 
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+<link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css"rel="stylesheet">
+<link href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css"rel="stylesheet">  
+<script>
+$(document).ready(function() {
+    $('#mi_tablita').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    } );
+} );	
+</script>

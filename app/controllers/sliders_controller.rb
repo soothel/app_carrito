@@ -2,7 +2,7 @@ class SlidersController < ApplicationController
   before_action :set_slider, only: %i[ show edit update destroy ]
   layout "panel_admin"
   before_action :authenticate_user!
-  
+
   # GET /sliders or /sliders.json
   def index
     @sliders = Slider.all
@@ -38,16 +38,16 @@ class SlidersController < ApplicationController
 
   # PATCH/PUT /sliders/1 or /sliders/1.json
   def update
+    # Toggling the value of `remark` between 1 and 0
+    new_remark_value = @slider.remark == 1 ? 0 : 1
+    @slider.update_columns(remark: new_remark_value)
+
     respond_to do |format|
-      if @slider.update(slider_params)
-        format.html { redirect_to slider_url(@slider), notice: "Slider was successfully updated." }
-        format.json { render :show, status: :ok, location: @slider }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @slider.errors, status: :unprocessable_entity }
-      end
+      format.html { redirect_to sliders_url, notice: "Slider was successfully updated." }
+      format.json { render :show, status: :ok, location: @slider }
     end
   end
+
 
   # DELETE /sliders/1 or /sliders/1.json
   def destroy
@@ -69,4 +69,5 @@ class SlidersController < ApplicationController
     def slider_params
       params.require(:slider).permit!
     end
+
 end

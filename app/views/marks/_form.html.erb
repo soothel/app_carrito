@@ -1,6 +1,6 @@
-<%= form_with(model: mark) do |form| %>
+<%= form_with(model: mark, html: { class: 'form'}) do |form| %>
   <% if mark.errors.any? %>
-    <div style="color: red">
+    <div class="alert alert-danger">
       <h2><%= pluralize(mark.errors.count, "error") %> prohibited this mark from being saved:</h2>
 
       <ul>
@@ -11,22 +11,24 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+  <div class="form-group">
+    <%= form.label :name, class: "form-control-label" %>
+    <%= form.text_field :name, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :image, style: "display: block" %>
-    <%= form.text_area :image %>
+  <div class="form-group">
+    <%= form.label :image, class: "form-control-label" %>
+    <%= form.file_field :image, class: "form-control" %>
+  </div>
+  
+  <img src="<%= mark.image %>" alt="img">
+
+  <div class="form-group">
+    <%= form.label :deleted, class: "form-control-label" %>
+    <%= form.number_field :deleted, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :deleted, style: "display: block" %>
-    <%= form.number_field :deleted %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+  <div class="form-group">
+    <%= form.submit "Save", class: "btn btn-primary" %>
   </div>
 <% end %>

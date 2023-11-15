@@ -5,7 +5,7 @@ class MarksController < ApplicationController
 
   # GET /marks or /marks.json
   def index
-    @marks = Mark.all
+    @list_array = Mark.where('deleted=0')
   end
 
   # GET /marks/1 or /marks/1.json

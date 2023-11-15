@@ -241,3 +241,40 @@
 	 	</button>
 	</div>
 </div>
+
+<section class="newsection" style="border: 1px solid #6b7485; height:300px">
+
+	<div class="text-mark d-flex justify-content-center">
+		<h2>Nuestras Marcas</h2>
+	</div>
+
+	<div class="row slider_w">
+		<div id="carouselExample2" class="carousel slide" style="background-color: white;">
+			<div class="carousel-inner ">
+				<% @list_marks = Mark.where("deleted =0").order("id ASC") %>
+				<% @list_marks.in_groups_of(4,false).each_with_index do |marks,index| %>
+				<!-- <% @list_products = Product.where("deleted=0") %> -->
+				<div class="carousel-item <% if index == 0 %>active<% end %> ">
+					<div class="w-100 gap-2 p-5" style="display: flex; justify-content:space-evenly">
+						<!-- ---------------------- -->
+						<% marks.each do |mark| %>
+							<div class="container-mark">
+								<img src=<%= mark.image %> alt="mark-image" height='50px' width='150px' >
+							</div>
+						<% end %>
+						</div>
+					</div>
+				<% end %>	
+			</div>
+			<button style="color: black;" class="carousel-control-prev" type="button" data-bs-target="#carouselExample2" data-bs-slide="prev">
+			  <span class="carousel-control-prev-icon" aria-hidden="true" style="filter: invert(1) grayscale(100);"></span>
+			  <span class="visually-hidden" style="filter: invert(1) grayscale(100);">Previous</span>
+			</button>
+			<button class="carousel-control-next" type="button" data-bs-target="#carouselExample2" data-bs-slide="next">
+			  <span class="carousel-control-next-icon" style="filter: invert(1) grayscale(100);" aria-hidden="true"></span>
+			  <span class="visually-hidden">Next</span>
+			</button>
+		  </div>
+		</div>
+
+</section>
